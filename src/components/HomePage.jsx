@@ -1,28 +1,27 @@
-import {
-  Card,
-  Page,
-  Layout,
-  TextContainer,
-  Image,
-  Stack,
-  Link,
-  Heading,
-} from "@shopify/polaris";
-
-import trophyImgUrl from "../assets/home-trophy.png";
-
-import { ProductsCard } from "./ProductsCard";
+import { ResourcePicker } from "@shopify/app-bridge-react";
+import { Page } from "@shopify/polaris";
+import React, { useState } from 'react'
 
 export function HomePage() {
+  const [isOpen, setIsOpen] = useState(false)
   return (
     <Page
-    title="Product Selector"
-    primaryAction={{
-      content: "Select product",
-      onAction: () => console.log("I have been clicked")
-    }}
+      title="Product Selector"
+      primaryAction={{
+        content: "Select product",
+        onAction: () => setIsOpen(true),
+      }}
     >
-      <Heading>My first shopify app</Heading>
+      <ResourcePicker 
+        resourceType="Product"
+        open={isOpen}
+        onCancel={() => setIsOpen(false)}
+        onSelection={(payload) => {
+          setIsOpen(false);
+          // Object with selected products
+          console.log(payload);
+        }}   
+      />
     </Page>
   );
 }
