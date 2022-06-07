@@ -1,6 +1,7 @@
 import { ResourcePicker } from "@shopify/app-bridge-react";
 import { Page } from "@shopify/polaris";
 import React, { useState } from 'react'
+import ProductList from "./ProductList";
 
 export function HomePage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -26,10 +27,7 @@ export function HomePage() {
         onCancel={() => setIsOpen(false)}
         onSelection={handleProductSelection}  
       />
-      {products.map((product) => {
-        // Display each selected product
-        return <div >{product.title}</div>
-      })}
+      <ProductList products={products}/>
     </Page>
   );
 }
